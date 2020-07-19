@@ -12,18 +12,16 @@ public class player_AI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log('d');
+
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         SceneManager.LoadScene("SampleScene");
-        Destroy(gameObject);
-
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         // angle += Time.deltaTime; // меняется плавно значение угла
         if (Input.GetKey(KeyCode.A))
