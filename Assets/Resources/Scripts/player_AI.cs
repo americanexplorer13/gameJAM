@@ -17,6 +17,11 @@ public class player_AI : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        game_controller._currentTrack++;
+        if (game_controller._currentTrack >= game_controller._audioList.Count)
+        {
+            game_controller._currentTrack = 0;
+        }
         SceneManager.LoadScene("SampleScene");
     }
 
