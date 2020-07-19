@@ -6,35 +6,46 @@ public class camera_AI : MonoBehaviour
 {
     int[] angle_list = { 0, 30, 60, 90, 120, 160, 180 };
     public Camera m_OrthographicCamera;
-    public float frequency = 20.0f;
+    public int frequency = 20;
     const float angle = 0.8f;
-    float timer_mil = 0;
+    int timer_mil = 0;
     int timer = 0;
     int iq = 0;
     int mem;
 
     private GameObject obstacle_1 { get; set; }
+
     private void Create_Obstacle()
     {
-        int index_1 = Random.Range(0, angle_list.Length);
+        int angle_index = Random.Range(0, angle_list.Length);
 
-        if (mem == index_1 && index_1 >= 3)
+        if (mem == angle_index && angle_index >= 3)
         {
-            index_1 -= Random.Range(0, 4);
+            angle_index -= Random.Range(0, 4);
         }
-        else if (mem == index_1 && index_1 <= 3)
+        else if (mem == angle_index && angle_index <= 3)
         {
-            index_1 += Random.Range(0, 4);
+            angle_index += Random.Range(1, 3);
         }
-
-        mem = index_1;
+        Debug.Log(angle_index);
+        mem = angle_index;
         obstacle_1 = new GameObject
         {
             name = "Obstacle_1"
         };
 
-        obstacle_1.AddComponent<obstacle_AI>();
-        obstacle_1.transform.Rotate(0, 0, angle_list[index_1]);
+        if (4 % Random.Range(1, 10) == 0)
+        {
+            obstacle_1.AddComponent<obstacle2_AI>();
+        }
+
+        else
+        {
+            obstacle_1.AddComponent<obstacle_AI>();
+        }
+
+        obstacle_1.transform.Rotate(0, 0, angle_list[angle_index]);
+
     }
 
     void Start()
